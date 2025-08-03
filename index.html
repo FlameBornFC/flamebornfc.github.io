@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =================================================================== -->
+    <!-- ========================= SEO META TAGS ========================= -->
+    <!-- =================================================================== -->
+    <!-- IMPORTANT: Replace the content below with your club's specific details. -->
+    
+    <!-- Primary Meta Tags -->
+    <title>FLAMEBORN FC - Official Website</title>
+    <meta name="title" content="FLAMEBORN FC - Official Website">
+    <meta name="description" content="The official home for FLAME BORN FC. Get the latest news, fixtures, player info, and gallery. Join us and feel the passion!">
+    <meta name="keywords" content="football club, Flame born fc , local football, soccer team, match schedule, football news, [malappuram] football,fbfc"> 
+    <meta name="author" content="G4/ Website Developers">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <!-- IMPORTANT: Replace with your live website URL once deployed -->
+    <meta property="og:url" content="https://your-username.github.io/your-repo-name/"> 
+    <meta property="og:title" content="Your Football Club Name - Official Website">
+    <meta property="og:description" content="The official home for Your Football Club Name. Get the latest news, fixtures, player info, and gallery.">
+    <!-- IMPORTANT: Replace with a URL to a high-quality image for sharing (e.g., your logo or a team photo) -->
+    <meta property="og:image" content="https://placehold.co/1200x630/FF0000/FFFFFF?text=YOUR+CLUB+BANNER">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <!-- IMPORTANT: Replace with your live website URL once deployed -->
+    <meta property="twitter:url" content="https://your-username.github.io/your-repo-name/">
+    <meta property="twitter:title" content="Your Football Club Name - Official Website">
+    <meta property="twitter:description" content="The official home for Your Football Club Name. Get the latest news, fixtures, player info, and gallery.">
+    <!-- IMPORTANT: Replace with a URL to a high-quality image for sharing (e.g., your logo or a team photo) -->
+    <meta property="twitter:image" content="https://placehold.co/1200x630/FF0000/FFFFFF?text=YOUR+CLUB+BANNER">
+
+    <!-- =================================================================== -->
+    <!-- ======================= END OF SEO META TAGS ====================== -->
+    <!-- =================================================================== -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Intro Loader Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-content {
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite, pulse 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header & Hero Section */
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url('https://placehold.co/1920x1080/000000/FFFFFF?text=Your+Team+Here') no-repeat center center/cover;
+            animation: zoomInBg 10s infinite alternate;
+        }
+        @keyframes zoomInBg {
+            from { background-size: 100% 100%; }
+            to { background-size: 110% 110%; }
+        }
+        .hero-title {
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 25px rgba(0, 0, 255, 0.7);
+        }
+
+        /* Button Styles */
+        .btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FF0000; /* Red */
+            z-index: -2;
+        }
+        .btn:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: #0000FF; /* Blue */
+            transition: all 0.3s;
+            z-index: -1;
+        }
+        .btn:hover {
+            color: white;
+        }
+        .btn:hover:before {
+            width: 100%;
+        }
+
+        /* Card Animation on Scroll */
+        .reveal {
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Custom Colors */
+        .bg-main-dark { background-color: #111111; }
+        .text-main-red { color: #FF0000; }
+        .text-main-blue { color: #0000FF; }
+        .text-main-yellow { color: #FFFF00; }
+        .border-main-red { border-color: #FF0000; }
+        .border-main-blue { border-color: #0000FF; }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- INTRO LOADER -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <!-- IMPORTANT: Replace with your club's logo URL -->
+            <img src="https://placehold.co/120x120/FF0000/FFFFFF?text=LOGO" alt="Club Logo" class="loader-logo">
+            <h1 class="text-2xl font-bold mt-4 text-white">WELCOME TO FBFC</h1>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header" class="header sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- IMPORTANT: Replace with your club's logo URL -->
+                <img src="https://placehold.co/50x50/FFFFFF/000000?text=LOGO" alt="Club Logo" class="w-12 h-12 mr-4">
+                <a href="#" class="text-2xl font-bold text-white">FLAMEBORN FC</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white hover:text-main-red transition">Home</a>
+                <a href="#team" class="text-white hover:text-main-red transition">The Team</a>
+                <a href="#matches" class="text-white hover:text-main-red transition">Matches</a>
+                <a href="#news" class="text-white hover:text-main-red transition">News</a>
+                <a href="#gallery" class="text-white hover:text-main-red transition">Gallery</a>
+                <a href="#developers" class="text-white hover:text-main-red transition">Developers</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-main-dark p-4">
+            <a href="#home" class="block text-white py-2">Home</a>
+            <a href="#team" class="block text-white py-2">The Team</a>
+            <a href="#matches" class="block text-white py-2">Matches</a>
+            <a href="#news" class="block text-white py-2">News</a>
+            <a href="#gallery" class="block text-white py-2">Gallery</a>
+            <a href="#developers" class="block text-white py-2">Developers</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="hero-section h-screen flex items-center justify-center text-center">
+            <div class="bg-black bg-opacity-50 p-8 rounded-lg">
+                <h1 class="text-5xl md:text-8xl font-black text-white uppercase hero-title">Rising From The Ashes</h1>
+                <p class="text-lg md:text-2xl text-gray-300 mt-4 max-w-2xl mx-auto">
+                    <!-- IMPORTANT: Edit this tagline -->
+                    We are more than a club. We are a family. turn Your Anger Into Power.
+                </p>
+                <div class="mt-8">
+                    <a href="#matches" class="btn inline-block bg-main-red text-white font-bold py-3 px-8 rounded-lg text-lg uppercase">
+                        Next Match
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FREE GAMES SECTION -->
+        <section class="bg-main-blue py-6 text-center">
+            <p class="text-white text-lg font-semibold">
+                Bored? Play Free Games! 
+                <!-- IMPORTANT: Replace 'https://poki.com' with your desired games website URL -->
+                <a href="https://gamesyte.github.io/" target="_blank" rel="noopener noreferrer" class="text-main-yellow font-bold underline hover:text-white transition">
+                    Click Here
+                </a>
+            </p>
+        </section>
+
+        <!-- TEAM SECTION -->
+        <section id="team" class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 reveal">Meet The <span class="text-main-red">Squad</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <!-- Player Card - Repeat for each player -->
+                    <div class="bg-main-dark rounded-lg overflow-hidden text-center p-6 reveal">
+                        <!-- IMPORTANT: Replace with player image -->
+                        <img src="https://placehold.co/300x300/111111/FFFFFF?text=Player" alt="Player Name" class="w-32 h-32 rounded-full mx-auto border-4 border-main-red">
+                        <h3 class="text-xl font-bold mt-4">Player Name</h3>
+                        <p class="text-main-blue">Position (e.g., Forward)</p>
+                    </div>
+                    <!-- Add more player cards here -->
+                    <div class="bg-main-dark rounded-lg overflow-hidden text-center p-6 reveal">
+                        <img src="https://placehold.co/300x300/111111/FFFFFF?text=Player" alt="Player Name" class="w-32 h-32 rounded-full mx-auto border-4 border-main-red">
+                        <h3 class="text-xl font-bold mt-4">Player Name</h3>
+                        <p class="text-main-blue">Position</p>
+                    </div>
+                    <div class="bg-main-dark rounded-lg overflow-hidden text-center p-6 reveal">
+                        <img src="https://placehold.co/300x300/111111/FFFFFF?text=Player" alt="Player Name" class="w-32 h-32 rounded-full mx-auto border-4 border-main-red">
+                        <h3 class="text-xl font-bold mt-4">Player Name</h3>
+                        <p class="text-main-blue">Position</p>
+                    </div>
+                    <div class="bg-main-dark rounded-lg overflow-hidden text-center p-6 reveal">
+                        <img src="https://placehold.co/300x300/111111/FFFFFF?text=Player" alt="Player Name" class="w-32 h-32 rounded-full mx-auto border-4 border-main-red">
+                        <h3 class="text-xl font-bold mt-4">Player Name</h3>
+                        <p class="text-main-blue">Position</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATCHES SECTION -->
+        <section id="matches" class="py-20 bg-main-dark">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 reveal">Upcoming <span class="text-main-blue">Fixtures</span></h2>
+                <!-- Match Item -->
+                <div class="bg-black rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between reveal">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <!-- IMPORTANT: Replace with your club logo -->
+                        <img src="https://placehold.co/60x60/FFFFFF/000000?text=LOGO" alt="Your Club" class="w-16 h-16">
+                        <span class="text-2xl font-bold mx-4">VS</span>
+                        <!-- IMPORTANT: Replace with opponent logo -->
+                        <img src="https://placehold.co/60x60/FF0000/FFFFFF?text=OPP" alt="Opponent Club" class="w-16 h-16">
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold">FBFC vs Opponent FC</h3>
+                        <p class="text-gray-400">PPL/ Friendly</p>
+                    </div>
+                    <div class="text-center mt-4 md:mt-0">
+                        <p class="text-lg font-semibold text-main-yellow">August 15, 2025 - 7:30 PM</p>
+                        <p class="text-gray-300">Home Stadium, City</p>
+                    </div>
+                </div>
+                <!-- Add more match items here -->
+            </div>
+        </section>
+
+        <!-- NEWS SECTION -->
+        <section id="news" class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 reveal">Latest <span class="text-main-red">News</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- News Card -->
+                    <div class="bg-main-dark rounded-lg overflow-hidden reveal">
+                        <!-- IMPORTANT: Replace with news image -->
+                        <img src="https://placehold.co/600x400/333333/FFFFFF?text=News+Image" alt="News" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <p class="text-sm text-gray-400 mb-2">August 10, 2025</p>
+                            <h3 class="text-xl font-bold mb-2">Historic Win for the Team!</h3>
+                            <p class="text-gray-300 mb-4">A brief description of the news article goes here. It was an amazing match...</p>
+                            <a href="#" class="text-main-blue hover:underline font-semibold">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Add more news cards here -->
+                    <div class="bg-main-dark rounded-lg overflow-hidden reveal">
+                        <img src="https://placehold.co/600x400/333333/FFFFFF?text=News+Image" alt="News" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <p class="text-sm text-gray-400 mb-2">August 5, 2025</p>
+                            <h3 class="text-xl font-bold mb-2">New Player Signing Announced</h3>
+                            <p class="text-gray-300 mb-4">The club is excited to welcome a new talent to the squad for the upcoming season.</p>
+                            <a href="#" class="text-main-blue hover:underline font-semibold">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="bg-main-dark rounded-lg overflow-hidden reveal">
+                        <img src="https://placehold.co/600x400/333333/FFFFFF?text=News+Image" alt="News" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <p class="text-sm text-gray-400 mb-2">July 28, 2025</p>
+                            <h3 class="text-xl font-bold mb-2">Community Day Event a Huge Success</h3>
+                            <p class="text-gray-300 mb-4">Thank you to all the fans who came out to support our community event last weekend.</p>
+                            <a href="#" class="text-main-blue hover:underline font-semibold">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery" class="py-20 bg-main-dark">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 reveal">Photo <span class="text-main-yellow">Gallery</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- IMPORTANT: Replace with your gallery images -->
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Match+Day" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 1"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Victory" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 2"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Training" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 3"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Fans" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 4"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Goal!" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 5"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Team" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 6"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Huddle" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 7"></div>
+                    <div class="reveal"><img src="https://placehold.co/400x400/555/FFF?text=Celebration" class="rounded-lg hover:scale-105 transition-transform duration-300" alt="Gallery Image 8"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEVELOPERS SECTION -->
+        <section id="developers" class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12 reveal">Website <span class="text-main-blue">Architects</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Developer 1 -->
+                    <div class="reveal">
+                        <!-- IMPORTANT: Replace with developer's photo -->
+                        <img src="https://placehold.co/150x150/111/FFF?text=Dev+1" class="w-36 h-36 rounded-full mx-auto mb-4 border-4 border-main-blue">
+                        <h3 class="text-xl font-bold">Ridhil_Xentrock</h3>
+                        <p class="text-gray-400">Developer One</p>
+                    </div>
+                    <!-- Developer 2 -->
+                    <div class="reveal">
+                        <img src="https://placehold.co/150x150/111/FFF?text=Dev+2" class="w-36 h-36 rounded-full mx-auto mb-4 border-4 border-main-blue">
+                        <h3 class="text-xl font-bold">Farseen_Farzed</h3>
+                        <p class="text-gray-400">Developer Two</p>
+                    </div>
+                    <!-- Developer 3 -->
+                    <div class="reveal">
+                        <img src="https://placehold.co/150x150/111/FFF?text=Dev+3" class="w-36 h-36 rounded-full mx-auto mb-4 border-4 border-main-blue">
+                        <h3 class="text-xl font-bold">Renil_Redsuke</h3>
+                        <p class="text-gray-400">Developer Three</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-main-dark py-12">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="flex justify-center mb-6">
+                <!-- IMPORTANT: Replace with your club logo -->
+                <img src="https://placehold.co/60x60/FFFFFF/000000?text=LOGO" alt="Club Logo" class="w-16 h-16">
+            </div>
+            <p class="text-lg font-bold text-white mb-4">FlameBorn FC</p>
+            
+            <!-- SOCIAL MEDIA LINKS -->
+            <div class="flex justify-center space-x-6 mb-6">
+                <!-- IMPORTANT: Replace '#' with your actual social media URLs -->
+                <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="#" aria-label="X" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                </a>
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.316 1.363.364 2.427.048 1.067.06 1.407.06 3.808s-.012 2.741-.06 3.808c-.048 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.316-2.427.364-1.067.048-1.407.06-3.808.06s-2.741-.012-3.808-.06c-1.064-.048-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.316-1.363-.364-2.427C2.013 14.741 2 14.401 2 12s.013-2.741.06-3.808c.048-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363.316 2.427-.364C8.92 2.013 9.26 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm6.406-11.845a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="#" aria-label="YouTube" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.78 22 12 22 12s0 3.22-.42 4.814a2.506 2.506 0 01-1.768 1.768c-1.594.42-7.812.42-7.812.42s-6.218 0-7.812-.42a2.506 2.506 0 01-1.768-1.768C2 15.22 2 12 2 12s0-3.22.42-4.814a2.506 2.506 0 011.768-1.768C5.782 5 12 5 12 5s6.218 0 7.812.418zM9.5 15.5V8.5l6 3.5-6 3.5z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+            
+            <p>&copy; 2025 All Rights Reserved. | Built with Passion</p>
+            <p class="text-sm mt-4">This website is a fan project and not affiliated with any official league.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Intro Loader ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1500); // Adjust time as needed
+        });
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Close Mobile Menu on Link Click ---
+        const mobileLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileLinks) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+
+        // --- Scroll Reveal Animation ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150; // Distance from bottom of viewport
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    // Optional: remove active class to re-trigger animation on scroll up
+                    // reveals[i].classList.remove("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Initial check
+        reveal();
+
+        // --- Smooth Scrolling for Anchor Links ---
+        // The `scroll-smooth` class in the <html> tag handles this with modern CSS.
+        // This script is a fallback or for more control if needed.
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
